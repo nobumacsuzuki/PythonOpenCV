@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import sys
 
 def main():
     filename = "lena_512x512.bmp"
@@ -26,8 +27,10 @@ def main():
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-    pathCascadeEye = 'C:\\Users\\nobum\\anaconda3\\pkgs\\libopencv-4.0.1-hbb9e17c_0\\Library\\etc\\haarcascades\\haarcascade_eye.xml'
-    pathCascadeFrontFace = 'C:\\Users\\nobum\\anaconda3\\pkgs\\libopencv-4.0.1-hbb9e17c_0\\Library\\etc\\haarcascades\\haarcascade_frontalface_default.xml'
+    pathPython  = sys.executable
+    pathPython = pathPython.replace('python.exe', '')
+    pathCascadeEye = pathPython + 'pkgs\\libopencv-4.0.1-hbb9e17c_0\\Library\\etc\\haarcascades\\haarcascade_eye.xml'
+    pathCascadeFrontFace = pathPython + 'pkgs\\libopencv-4.0.1-hbb9e17c_0\\Library\\etc\\haarcascades\\haarcascade_frontalface_default.xml'
 
     face_cascade = cv2.CascadeClassifier(pathCascadeFrontFace)
     eye_cascade = cv2.CascadeClassifier(pathCascadeEye)
