@@ -34,7 +34,7 @@ def main():
     # face and eye recongnition based on haar cascade
     pathPython  = sys.executable
     pathPython = pathPython.replace('python.exe', '')
-    pathCascade = os.path.join(pathPython, 'pkgs\\libopencv-4.0.1-hbb9e17c_0\\Library\\etc\\haarcascades')
+    pathCascade = os.path.join(pathPython, r'pkgs\libopencv-4.0.1-hbb9e17c_0\Library\etc\haarcascades')
     pathCascadeEye = os.path.join(pathCascade, 'haarcascade_eye.xml')
     pathCascadeFrontFace = os.path.join(pathCascade,'haarcascade_frontalface_default.xml')
 
