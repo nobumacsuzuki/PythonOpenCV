@@ -7,24 +7,25 @@ def main():
     filename = "lena_512x512.bmp"
 
     # color
-    imageColor = cv2.imread(filename, 1)
+    imageColor = cv2.imread(filename, cv2.IMREAD_COLOR)
     cv2.imshow('Color image',imageColor)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
     # gray
-    imageGray = cv2.imread(filename, 0)
+    imageGray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
     print(imageGray)
     cv2.imshow('Grat image',imageGray)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
     # perspetive transform
+    offsetPerspective = 100
     heightImageColor, widthImageColor = imageColor.shape[:2]
     print(heightImageColor)
     print(widthImageColor)
     rectangleSource = np.array([[0, 0], [0, heightImageColor], [widthImageColor, heightImageColor], [widthImageColor, 0]], dtype=np.float32)
-    rectangleTarget = np.array([[100, 100], [0, heightImageColor - 100], [widthImageColor, heightImageColor - 100], [widthImageColor - 100, 100]], dtype=np.float32)
+    rectangleTarget = np.array([[offsetPerspective, offsetPerspective], [0, heightImageColor - offsetPerspective], [widthImageColor, heightImageColor - offsetPerspective], [widthImageColor - offsetPerspective, offsetPerspective]], dtype=np.float32)
     matrixPerspective = cv2.getPerspectiveTransform(rectangleSource, rectangleTarget)
     imagePerspective = cv2.warpPerspective(imageColor, matrixPerspective, (widthImageColor, heightImageColor))
     cv2.imshow('Perspective Transform', imagePerspective)
