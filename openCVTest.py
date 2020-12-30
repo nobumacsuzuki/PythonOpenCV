@@ -79,5 +79,46 @@ def main():
         plt.xlim([0,256])
     plt.show()
 
+    ndarrayImageGray = imageGray
+    print(ndarrayImageGray)
+    print(ndarrayImageGray.dtype)
+    print(ndarrayImageGray.shape)
+    cv2.imshow('Y channel only', ndarrayImageGray)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    # FFT and centered
+    arrayFFTed = np.fft.fft2(ndarrayImageGray)
+    arrayShiftedFFTed = np.fft.fftshift(arrayFFTed)
+
+    # Frequency component power spectrum
+    arrayPowerSpectrumFFTRealPart = 20 * np.log(np.absolute(arrayShiftedFFTed))
+
+    ndarrayBuffer = np.copy(arrayPowerSpectrumFFTRealPart)
+    min = np.min(ndarrayBuffer)
+    ndarrayBuffer[:,:] -= min
+    max = np.max(ndarrayBuffer)
+    ndarrayBuffer[:,:] /= max
+    ndarrayBuffer[:,:] *= 255
+    print(ndarrayBuffer)
+    ndarrayBufferUint8 = ndarrayBuffer.astype(np.uint8)
+    print(ndarrayBufferUint8.dtype)
+    print(ndarrayBufferUint8.shape)
+    cv2.imshow('PowerSpectrum', ndarrayBufferUint8)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    # Uncentered and Inverse FFT
+    arrayRevertedShiftedFFTed = np.fft.fftshift(arrayShiftedFFTed)
+    arrayInvertFFTed = np.fft.ifft2(arrayRevertedShiftedFFTed).real
+    ndarrayBufferUint8 = arrayInvertFFTed.astype(np.uint8)
+    print(ndarrayBufferUint8.dtype)
+    print(ndarrayBufferUint8.shape)
+
+    cv2.imshow('Revered Back Image', ndarrayBufferUint8)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
 if __name__ == "__main__":
     main()
