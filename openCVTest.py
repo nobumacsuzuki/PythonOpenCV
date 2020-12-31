@@ -109,7 +109,7 @@ def main():
     # histogram
     arrayImageColor = cv2.imread(filename, cv2.IMREAD_COLOR)
     colors = ('b','g','r') #matlibplot has the color index, https://matplotlib.org/3.1.0/api/colors_api.html#module-matplotlib.colors
-    for (indexColor, color) in enumerate(colors): #enumerate provides list of object with index, in this case [(0, 'b'), (1, 'g'), (2, 'r')] 
+    for (indexColor, color) in enumerate(colors): # it provides list of object with index, in this case [(0, 'b'), (1, 'g'), (2, 'r')] 
         # https://docs.opencv.org/master/d1/db7/tutorial_py_histogram_begins.html
         # cv.calcHist(images, channels, mask, histSize, ranges[, hist[, accumulate]])
         # images : it is the source image of type uint8 or float32. it should be given in square brackets, ie, "[img]".
